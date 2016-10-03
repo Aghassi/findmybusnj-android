@@ -19,7 +19,6 @@ public class MainViewAdaptor extends FragmentPagerAdapter {
 
         this.Titles = mTitles;
         this.NumbOfTabs = mNumbOfTabsumb;
-
     }
 
     //This method return the fragment for the every position in the View Pager
