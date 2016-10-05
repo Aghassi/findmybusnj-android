@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/search_button"
+        android:title="Search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:showAsAction="ifRoom"/>
+    <item android:id="@+id/save_button"
+        android:title="Save"
+        android:icon="@android:drawable/ic_menu_save"
+        android:showAsAction="ifRoom"/>
+    <item android:id="@+id/favorite_button"
+        android:title="Favorites"
+        android:icon="@android:drawable/btn_star"
+        android:showAsAction="ifRoom"/>
+</menu>
