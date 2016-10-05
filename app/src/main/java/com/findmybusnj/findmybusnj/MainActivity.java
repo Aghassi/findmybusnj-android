@@ -1,14 +1,13 @@
 package com.findmybusnj.findmybusnj;
 
+import android.content.Intent;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
+import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
     // Declaring Your View and Variables
@@ -44,5 +43,25 @@ public class MainActivity extends AppCompatActivity {
         inflater.inflate(R.menu.main_activity_actions, menu);
 
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.search_button:
+                System.out.print("search tapped");
+                return true;
+
+            case R.id.favorite_button:
+                startActivity(new Intent(this, Favorites.class));
+                return true;
+            case R.id.save_button:
+                System.out.print("saved tapped");
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
     }
 }
