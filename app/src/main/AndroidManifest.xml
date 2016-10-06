@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Favorites"
+            android:name=".SearchFavoritesActivity"
             android:label="@string/title_activity_favorites"
             android:theme="@style/NoActionBar"
             android:parentActivityName=".MainActivity"></activity>

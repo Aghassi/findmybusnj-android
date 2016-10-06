@@ -50,11 +50,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.search_button:
-                System.out.print("search tapped");
-                return true;
-
-            case R.id.favorite_button:
-                startActivity(new Intent(this, Favorites.class));
+                startActivity(new Intent(this, SearchFavoritesActivity.class));
                 return true;
             case R.id.save_button:
                 System.out.print("saved tapped");
