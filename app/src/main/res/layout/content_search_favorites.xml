@@ -13,15 +13,6 @@
     tools:context="com.findmybusnj.findmybusnj.SearchFavoritesActivity"
     tools:showIn="@layout/activity_search_favorites">
 
-    <TextView
-        android:text="Favorites"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/search_button"
-        android:layout_alignParentStart="true"
-        android:id="@+id/favorite_label"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -57,17 +48,6 @@
         android:layout_alignParentEnd="true"
         android:maxLength="5"/>
 
-    <Button
-        android:text="Search"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/search_button"
-        style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_below="@+id/route_input"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:textSize="18sp" />
-
     <TextView
         android:text="Route:"
         android:layout_width="wrap_content"
@@ -87,5 +67,34 @@
         android:layout_alignBaseline="@+id/stop_number_input"
         android:layout_alignBottom="@+id/stop_number_input"
         android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="Favorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/favorite_label"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:layout_below="@+id/search_button"
+        android:layout_alignParentStart="true"
+        android:padding="2dp" />
+
+    <Button
+        android:text="Search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/search_button"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp"
+        android:layout_below="@+id/route_input"
+        android:layout_centerHorizontal="true" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:background="@android:color/darker_gray"
+        android:layout_above="@+id/favorite_label"
+        android:layout_alignParentStart="true"
+        android:layout_height="1dp"
+        android:layout_margin="2dp" />
 
 </RelativeLayout>
