@@ -1,0 +1,35 @@
+Week 1: (From log on the website)
+
+
+
+9/26 - Installed and began to step through the "Introduction to Android Studio" tutorial.
+
+9/27 - Finished "Introduction to Android Studio" tutorial and moved to reviewing first app "composr" created on old version of Android Studio for comparison.
+
+9/28 - Continued stepping through "composr." Ran into problem with crashing emulator: fixed. Browsed forums (stackoverflow&googleblog) for solution. Found Genymotion: a plugin for Eclipse. Familiarized myself with iOS FindMyBusNJ structure. 
+
+
+
+Week 2:
+
+
+
+10/6 - 10/7: 
+
+
+Extra notes (because commited prematurely):
+
+
+- Manifest now has user permissions
+	
+- Internet, Read/Write External, Fine Location, Access
+	
+- Google Maps Key: AIzaSyCct5h4ncVFAs3bl31HTe9N5TNpN80iT6Y 
+
+- Check for xml on google_maps_*
+	
+- Intents for new tabs (Search, Nearby)
+
+- Next: Brute Force FragmentActivity (default maps) to Fragment (current Nearby Tab)
+
+- How to make map only in Fragment.
