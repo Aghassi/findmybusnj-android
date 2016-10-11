@@ -1,11 +1,13 @@
 package com.findmybusnj.findmybusnj;
 
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -37,23 +39,50 @@ public class SearchFavoritesActivity extends AppCompatActivity {
         search.setOnClickListener(searchListener);
     }
 
+    class RequestManager extends AsyncTask<String, Void, JSONArray> {
+
+        @Override
+        protected JSONArray doInBackground(String... params) {
+            Webb webb = Webb.create();
+            webb.setBaseUri("https://findmybusnj.com/rest");
+
+            // Get the parameters
+            String stop = params[0].toString();
+            String route = params[1].toString();
+
+            // Make actual URL based on inputs
+            if (route.isEmpty()) {
+                return webb.post("/stop")
+                        .param("stop", stop)
+                        .ensureSuccess()
+                        .asJsonArray()
+                        .getBody();
+            } else {
+                return webb.post("/stop/byRoute")
+                        .param("stop", stop)
+                        .param("route", route)
+                        .ensureSuccess()
+                        .asJsonArray()
+                        .getBody();
+            }
+        }
+
+        protected void onPostExecute(JSONArray response) {
+            Log.d("Response: ", response.toString());
+        }
+    }
+
+
     /**
      * Makes a post request to the server and notifies the ListView it needs to update with new data
      */
     private void makePostRequest() {
-        Webb webb = Webb.create();
-        webb.setBaseUri("https://findmybusnj.com/rest");
-
-        // will contain the raw JSON repsonse as a string
-        String busTimes = null;
-
         // Gets stop textfield along with contents
         TextView stop_input = (TextView) findViewById(R.id.stop_number_input);
         TextView route_input = (TextView) findViewById(R.id.route_input);
         String stop = stop_input.getText().toString();
         String route = route_input.getText().toString();
 
-        // Warn user if no input is given
         if (stop.isEmpty()) {
             new AlertDialog.Builder(this)
                     .setTitle("Stop Required")
@@ -66,23 +95,7 @@ public class SearchFavoritesActivity extends AppCompatActivity {
                     .setIcon(android.R.drawable.ic_dialog_alert)
                     .show();
         } else {
-            // Make actual URL based on inputs
-            if (route.isEmpty()) {
-                JSONArray response = webb.post("/stop")
-                        .param("stop", stop)
-                        .ensureSuccess()
-                        .asJsonArray()
-                        .getBody();
-
-            } else {
-                JSONArray response = webb.post("/stop/byRoute")
-                        .param("stop", stop)
-                        .param("route", route)
-                        .ensureSuccess()
-                        .asJsonArray()
-                        .getBody();
-            }
-
+            new RequestManager().execute(stop, route);
         }
     }
 }
