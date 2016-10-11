@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.net.HttpURLConnection;
 
 public class SearchFavoritesActivity extends AppCompatActivity {
+    // Used when search button is pressed
     private View.OnClickListener searchListener = new View.OnClickListener() {
         public void onClick(View v) {
             makePostRequest();
@@ -35,6 +36,9 @@ public class SearchFavoritesActivity extends AppCompatActivity {
         search.setOnClickListener(searchListener);
     }
 
+    /**
+     * Makes a post request to the server and notifies the ListView it needs to update with new data
+     */
     private void makePostRequest() {
         HttpURLConnection urlConnection = null;
         BufferedReader reader = null;
@@ -42,6 +46,7 @@ public class SearchFavoritesActivity extends AppCompatActivity {
         // will contain the raw JSON repsonse as a string
         String busTimes = null;
 
+        // Gets stop textfield along with contents
         TextView stop_input = (TextView) findViewById(R.id.stop_number_input);
         String stop = stop_input.getText().toString();
 
