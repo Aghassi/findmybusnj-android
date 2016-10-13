@@ -3,12 +3,14 @@ package com.findmybusnj.findmybusnj;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.SparseArray;
 
 /**
  * Created by davidaghassi on 9/30/16.
  */
 
 public class MainViewAdaptor extends FragmentPagerAdapter {
+    SparseArray<Fragment> registeredFragments = new SparseArray<Fragment>();
     CharSequence Titles[]; // This will Store the Titles of the Tabs which are Going to be passed when MainViewAdaptor is created
     int NumbOfTabs; // Store the number of tabs, this will also be passed when the ViewPagerAdapter is created
 
@@ -28,11 +30,13 @@ public class MainViewAdaptor extends FragmentPagerAdapter {
         if(position == 0) // if the position is 0 we are returning the First tab
         {
             SearchTab searchTab = new SearchTab();
+            registeredFragments.put(0, searchTab);
             return searchTab;
         }
         else             // As we are having 2 tabs if the position is now 0 it must be 1 so we are returning second tab
         {
             NearByTab nearBy = new NearByTab();
+            registeredFragments.put(1, nearBy);
             return nearBy;
         }
 
@@ -40,16 +44,28 @@ public class MainViewAdaptor extends FragmentPagerAdapter {
     }
 
     // This method return the titles for the Tabs in the Tab Strip
-
     @Override
     public CharSequence getPageTitle(int position) {
         return Titles[position];
     }
 
     // This method return the Number of tabs for the tabs Strip
-
     @Override
     public int getCount() {
         return NumbOfTabs;
+    }
+
+    /**
+     * Returns the fragment at a given position
+     * @param position the position being requested. If greater than the size of registered fragments
+     *                 then a new Fragment is returned
+     * @return
+     */
+    public Fragment getRegisteredFragment(int position) {
+        if (position > registeredFragments.size()) {
+            return new Fragment();
+        } else {
+            return registeredFragments.get(position);
+        }
     }
 }

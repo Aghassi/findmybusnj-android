@@ -1,6 +1,7 @@
 package com.findmybusnj.findmybusnj;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
@@ -86,8 +87,6 @@ public class SearchFavoritesActivity extends AppCompatActivity {
         protected void onPostExecute(JSONArray response) {
             // Dismiss current activity
             updateList(response);
-            finish();
-            Log.d("Response: ", response.toString());
         }
     }
 
@@ -119,11 +118,14 @@ public class SearchFavoritesActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Sends the JSONArray back to the parent of this activity via Intent extras
+     * @param response  JSONArray retrieved from the server
+     */
     private void updateList(JSONArray response) {
-        ListView listView = (ListView) findViewById(R.id.stop_list);
-        ArrayAdapter listViewAdapter = (ArrayAdapter) listView.getAdapter();
-        listViewAdapter.clear();
-        listViewAdapter.addAll(response);
-        listViewAdapter.notifyDataSetChanged();
+        Intent intent = getIntent().putExtra("ResponseArray", response.toString());
+        setResult(RESULT_OK, intent);
+        finish();
+        Log.d("Response: ", response.toString());
     }
 }
