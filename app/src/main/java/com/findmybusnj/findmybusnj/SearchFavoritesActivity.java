@@ -10,16 +10,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.goebl.david.Webb;
 
 import org.json.JSONArray;
-
-import java.util.List;
 
 public class SearchFavoritesActivity extends AppCompatActivity {
     // Used when search button is pressed

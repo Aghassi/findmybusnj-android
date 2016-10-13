@@ -8,14 +8,9 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 
-import java.io.Serializable;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     // Declaring Your View and Variables
@@ -77,11 +72,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         String responseData = data.getStringExtra("ResponseArray");
-        try {
-            JSONArray response = new JSONArray(responseData);
-            ListView listView = (ListView) pager.findViewById(R.id.stop_list);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        SearchTab tab = (SearchTab) adapter.getRegisteredFragment(0);
+        tab.updateListView(responseData);
     }
 }

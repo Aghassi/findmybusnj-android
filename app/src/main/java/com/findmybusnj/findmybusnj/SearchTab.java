@@ -8,6 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.List;
+
 /**
  * Created by davidaghassi on 9/30/16.
  *
@@ -29,5 +34,21 @@ public class SearchTab extends Fragment {
         resultList.setAdapter(adapter);
 
         return view;
+    }
+
+    public void updateListView(String response) {
+        JSONArray array= null;
+        try {
+            array = new JSONArray(response);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // Convert JSONArray to list of special objects
+
+        // Update list
+        ListView resultList = (ListView) getView().findViewById(R.id.stop_list);
+        ArrayAdapter adapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_list_item_1);
+        resultList.setAdapter(adapter);
     }
 }
