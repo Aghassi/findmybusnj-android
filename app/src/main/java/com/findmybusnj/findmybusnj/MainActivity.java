@@ -53,10 +53,14 @@ public class MainActivity extends AppCompatActivity {
 
         switch (item.getItemId()) {
             case R.id.search_button:
+                // Set the expected result number
+                final int result = 1;
+
+                // Create an intent, attach extras to be passed back and forth, start the activity
                 Intent searchFavoriteActivityIntent = new Intent(this, SearchFavoritesActivity.class);
                 searchFavoriteActivityIntent.putExtra("ResponseArray", new JSONArray().toString());
-                final int result = 1;
                 startActivityForResult(searchFavoriteActivityIntent, result);
+
                 return true;
             case R.id.save_button:
                 System.out.print("saved tapped");
@@ -71,6 +75,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // retrieves the data passed from the server response, passes it to the fragment to handle updating
         String responseData = data.getStringExtra("ResponseArray");
         SearchTab tab = (SearchTab) adapter.getRegisteredFragment(0);
         tab.updateListView(responseData);
