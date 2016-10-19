@@ -9,13 +9,35 @@ public class ResultDataModel {
     private String route = "";
     private int time = 0;
     private boolean noPrediction = false;
+    private boolean delayed = false;
+    private boolean arriving = false;
+
+    public boolean isDelayed() {
+        return delayed;
+    }
+
+    public void setDelayed(boolean delayed) {
+        this.delayed = delayed;
+    }
+
+    public boolean isArriving() {
+        return arriving;
+    }
+
+    public void setArriving(boolean arriving) {
+        this.arriving = arriving;
+    }
 
     public int getTime() {
         return time;
     }
 
     public void setTime(int time) {
-        this.time = time;
+        if (time == 0) {
+            setArriving(true);
+        } else {
+            this.time = time;
+        }
     }
 
     public boolean isNoPrediction() {

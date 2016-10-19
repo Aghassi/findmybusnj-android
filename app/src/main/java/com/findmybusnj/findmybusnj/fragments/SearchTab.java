@@ -2,6 +2,7 @@ package com.findmybusnj.findmybusnj.fragments;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.findmybusnj.findmybusnj.R;
+import com.findmybusnj.findmybusnj.models.ResultDataModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -47,10 +50,33 @@ public class SearchTab extends Fragment {
         }
 
         // Convert JSONArray to list of special objects
+        ResultDataModel[] results = new ResultDataModel[array.length()];
+        for (int i = 0; i < array.length(); i++) {
+            ResultDataModel responseData = new ResultDataModel();
+
+            try {
+                JSONObject jsonObject = (JSONObject) array.get(i);
+
+                responseData.setBusNumber(jsonObject.get("fd").toString());
+                responseData.setRoute(jsonObject.get("rd").toString());
+                // Get the time, or determine otherwise
+                if (!jsonObject.get("pu").toString().equals("MINUTES")) {
+                    responseData.setDelayed(true);
+                } else {
+                    responseData.setTime(new Integer(jsonObject.get("pt").toString()));
+                }
+
+                Log.d("Response object:", responseData.getBusNumber() + ", " + responseData.getRoute() + ", " + "time: " + responseData.getTime());
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         // Update list
         ListView resultList = (ListView) getView().findViewById(R.id.stop_list);
-        ArrayAdapter adapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_list_item_1);
-        resultList.setAdapter(adapter);
+        // Create custom array adaptor
+//        ArrayAdapter adapter = new ArrayAdapter(this.getContext(), android.R.layout.simple_list_item_1, results);
+//        resultList.setAdapter(adapter);
     }
 }
