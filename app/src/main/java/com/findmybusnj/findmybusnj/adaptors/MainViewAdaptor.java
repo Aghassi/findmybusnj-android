@@ -1,9 +1,12 @@
-package com.findmybusnj.findmybusnj;
+package com.findmybusnj.findmybusnj.adaptors;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.util.SparseArray;
+
+import com.findmybusnj.findmybusnj.fragments.NearByTab;
+import com.findmybusnj.findmybusnj.fragments.SearchTab;
 
 /**
  * Created by davidaghassi on 9/30/16.

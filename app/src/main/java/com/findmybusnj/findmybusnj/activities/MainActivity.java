@@ -1,4 +1,4 @@
-package com.findmybusnj.findmybusnj;
+package com.findmybusnj.findmybusnj.activities;
 
 import android.content.Intent;
 import android.support.design.widget.TabLayout;
@@ -8,6 +8,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+
+import com.findmybusnj.findmybusnj.adaptors.MainViewAdaptor;
+import com.findmybusnj.findmybusnj.R;
+import com.findmybusnj.findmybusnj.fragments.SearchTab;
 
 import org.json.JSONArray;
 

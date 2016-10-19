@@ -1,4 +1,4 @@
-package com.findmybusnj.findmybusnj;
+package com.findmybusnj.findmybusnj.activities;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.findmybusnj.findmybusnj.R;
 import com.goebl.david.Webb;
 
 import org.json.JSONArray;
