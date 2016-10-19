@@ -61,7 +61,12 @@ public class SearchTab extends Fragment {
                 responseData.setRoute(jsonObject.get("rd").toString());
                 // Get the time, or determine otherwise
                 if (!jsonObject.get("pu").toString().equals("MINUTES")) {
-                    responseData.setDelayed(true);
+                    switch (jsonObject.get("pu").toString()){
+                        case "APPROACHING":
+                            responseData.setArriving(true);
+                        case "DELAYED":
+                            responseData.setDelayed(true);
+                    }
                 } else {
                     responseData.setTime(new Integer(jsonObject.get("pt").toString()));
                 }
