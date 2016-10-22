@@ -46,7 +46,13 @@ public class SearchTab extends Fragment {
     public void updateListView(String response) {
         JSONArray array= null;
         try {
-            array = new JSONArray(response);
+            if (response.isEmpty()) {
+                ResultDataModel responseData = new ResultDataModel();
+                responseData.isNoPrediction();
+                array = new JSONArray(responseData);
+            } else {
+                array = new JSONArray(response);
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -61,6 +67,7 @@ public class SearchTab extends Fragment {
 
                 responseData.setBusNumber(jsonObject.get("rd").toString());
                 responseData.setRoute(jsonObject.get("fd").toString());
+
                 // Get the time, or determine otherwise
                 if (!jsonObject.get("pu").toString().equals("MINUTES")) {
                     switch (jsonObject.get("pu").toString()){
