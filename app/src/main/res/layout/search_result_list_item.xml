@@ -4,26 +4,27 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.findmybusnj.findmybusnj.drawable.Circle
-        android:id="@+id/arrivalCircle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true" />
+    <!--<com.findmybusnj.findmybusnj.drawable.Circle-->
+        <!--android:id="@+id/arrivalCircle"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_alignParentTop="true" />-->
 
     <TextView
-        android:id="@+id/routeLabel"
+        android:id="@+id/routeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/routeDetails"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true" />
+        android:layout_below="@+id/routeTitle"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>
