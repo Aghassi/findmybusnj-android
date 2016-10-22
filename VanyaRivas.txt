@@ -41,3 +41,17 @@ Week 3:
 10/13: Spent an hour testing different ways to implement Google Maps in a fragment vs Activity
 	Realized my anti virus (Kaspersky) was deleting java.exe from my computer after reinstalling the jre thinking it was a trojan #bless
 10/14: Spent 2 hours - Implemented a map! Map now works.. almost done with obtaining user location --> Working on pins for map
+
+Week 4:
+
+10/18: Encountered road block with permissions and -- anti-virus deleting various components of jre; keep having to reinstall and ate up a lot of time...
+
+10/20: Spent time reading up on user location permissions - accidentally learned about the inner mechanics of how permissions are looked up.
+	- getContext() to overcome not an actual activiy
+	- getMapAsync() (OnMapReadCallbak) covers deprecated getMap()
+	- Marshmallow 6.0+ requires extra permission security, set sdk to >22 to "bypass"
+10/21: Spent three hours 
+	- Able to request permissions successfully for pre & post marshmallow update
+	- Created markers with name and title; worked on view
+	- Having trouble implementing token features on map outside of registered user gestures
+	Need to check: Mapview vs and OnMapReady(GoogleMap map) ***
