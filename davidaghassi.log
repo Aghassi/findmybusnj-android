@@ -5,3 +5,4 @@
 10/13 - Spent about 2-3 hours learninga bout how Activities and Fragments pass data back and forth
 10/14 - Spent the week getting JSON data from REST call and passing it between activities. Plan for next week is to create custom data model to handle response.
 10/21 - Spent the week laying ground work to display data in the listview. Created custom data model and started work on custom ArrayAdapter.
+10/26 - Researched use of native SQLite database for storing and retrieving data models for favorite saved stops
