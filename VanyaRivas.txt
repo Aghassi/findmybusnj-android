@@ -55,3 +55,12 @@ Week 4:
 	- Created markers with name and title; worked on view
 	- Having trouble implementing token features on map outside of registered user gestures
 	Need to check: Mapview vs and OnMapReady(GoogleMap map) ***
+
+Week 5:
+10/24: Received error with finding user location: conflict with types on mapview -->fragment vs mapview -->mapfragment
+10/27: Slight change in plan: read up on correlation between emulators and android phone, 
+	- accidentally reformatted own phone.....
+	- Restarted the tab from scratch with clean code
+10/28: it works on the phone but not on emulator. 
+	- Problem: only gets user locaiton assuming you used a location necessary app.
+	- Next: ^ Why. Also work on customization on map for name of areas + bus stop.
