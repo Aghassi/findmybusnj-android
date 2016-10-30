@@ -8,6 +8,11 @@ public class Favorite {
     // private variables
     private String stop = "";
     private String route = "";
+    private int frequency = 0;
+
+    public String generatePrimaryKey() {
+        return this.stop + this.route;
+    }
 
     public Favorite(String stop, String route, int frequency) {
         this.stop = stop;
@@ -35,11 +40,7 @@ public class Favorite {
         return frequency;
     }
 
-    public void setFrequency(int frequency) {
-        this.frequency = frequency;
+    public void incrementFrequency() {
+        this.frequency++;
     }
-
-    private int frequency = 0;
-
-
 }
