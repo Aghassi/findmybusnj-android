@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.findmybusnj.findmybusnj.models.Favorite;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -80,7 +81,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @param favorite
      */
     public void deleteFavorite(Favorite favorite) {
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_FAVORITES, KEY_PK + " = ?",
+                new String[] { String.valueOf(favorite.generatePrimaryKey())});
+        db.close();
     }
 
     /**
@@ -106,10 +110,31 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     /**
      * Gets a list of all the favorites from the database
-     * @return A list of all the favorites in the table
+     * @return A list of all the favorites in the table, or an empty list none
      */
     public List<Favorite> getAllFavorites() {
+        // Setting up query and return array
+        List<Favorite> favoriteList = new ArrayList<Favorite>();
+        String selectQuery = "SELECT * FROM " + TABLE_FAVORITES;
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // Loop through all the rosw and add to the list
+        if (cursor.moveToFirst()) {
+            do {
+                // Create the favorite
+                Favorite favorite = new Favorite();
+                favorite.setStop(cursor.getString(1));
+                favorite.setRoute(cursor.getString(2));
+                favorite.setFrequency(cursor.getInt(3));
+
+                // add to the list
+                favoriteList.add(favorite);
+            } while (cursor.moveToNext());
+        }
+
+        return favoriteList;
     }
 
     /**
@@ -126,6 +151,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @return
      */
     public int updateFavorite(Favorite favorite) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        ContentValues values = new ContentValues();
+        values.put(KEY_PK, favorite.generatePrimaryKey());
+        values.put(KEY_STOP, favorite.getStop());
+        values.put(KEY_ROUTE, favorite.getRoute());
+
+        favorite.incrementFrequency();
+        values.put(KEY_FREQ, favorite.getFrequency());
+
+        return db.update(TABLE_FAVORITES, values, KEY_PK + " = ?",
+                new String[] { String.valueOf(favorite.generatePrimaryKey())});
     }
 }

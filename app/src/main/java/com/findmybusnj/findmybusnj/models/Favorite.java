@@ -10,14 +10,22 @@ public class Favorite {
     private String route = "";
     private int frequency = 0;
 
-    public String generatePrimaryKey() {
-        return this.stop + this.route;
+    // Constructors
+    public Favorite() {
+        this.stop = "";
+        this.route = "";
+        this.frequency = 0;
     }
 
     public Favorite(String stop, String route, int frequency) {
         this.stop = stop;
         this.route = route;
         this.frequency = frequency;
+    }
+
+    // Getter and Setters
+    public String generatePrimaryKey() {
+        return this.stop + this.route;
     }
 
     public String getStop() {
@@ -39,6 +47,8 @@ public class Favorite {
     public int getFrequency() {
         return frequency;
     }
+
+    public void setFrequency(int frequency) { this.frequency = frequency; }
 
     public void incrementFrequency() {
         this.frequency++;
