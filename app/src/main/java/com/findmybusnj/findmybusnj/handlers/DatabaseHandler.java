@@ -142,7 +142,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * @return The count of favorites
      */
     public int getFavoritesCount() {
+        String selectQuery = "SELECT * FROM " + TABLE_FAVORITES;
 
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        cursor.close();
+
+        return cursor.getCount();
     }
 
     /**
