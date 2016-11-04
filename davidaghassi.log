@@ -6,3 +6,4 @@
 10/14 - Spent the week getting JSON data from REST call and passing it between activities. Plan for next week is to create custom data model to handle response.
 10/21 - Spent the week laying ground work to display data in the listview. Created custom data model and started work on custom ArrayAdapter.
 10/26 - Researched use of native SQLite database for storing and retrieving data models for favorite saved stops
+11/4 -  Implemented SQLDatabaseHelper class and started setting up for data passing around to store and retrieve favorites
