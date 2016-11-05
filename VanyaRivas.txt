@@ -64,3 +64,10 @@ Week 5:
 10/28: it works on the phone but not on emulator. 
 	- Problem: only gets user locaiton assuming you used a location necessary app.
 	- Next: ^ Why. Also work on customization on map for name of areas + bus stop.
+
+Week 6:
+10/30: Learned about markers on Google Maps API and customization
+11/1: FusedLocationApi covers deprecated Location Request and Location Services!!
+11/4: Officially gets user location and marks with marker both on emulator and with Android phone.
+	- started working on populating the map with nearby locations as given by database
+Next: work on zoom function and visual flares. CONTINUE with populating the map
