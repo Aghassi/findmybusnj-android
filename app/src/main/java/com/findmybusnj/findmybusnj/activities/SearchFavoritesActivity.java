@@ -47,6 +47,7 @@ public class SearchFavoritesActivity extends AppCompatActivity {
         Button search = (Button) findViewById(R.id.search_button);
         search.setOnClickListener(searchListener);
 
+        // Locate the listview for favorites and populate the list with the favorites currently stored
         ListView listView = (ListView) findViewById(R.id.favorite_list_view);
         DatabaseHandler handler = new DatabaseHandler(this);
         List<Favorite> favoriteArrayList = handler.getAllFavorites();

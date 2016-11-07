@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     CharSequence Titles[] = {"Search","Near By"};
     int Numboftabs = 2;
 
-    String currentStop = "";
-    String currentRoute = "";
+    private String currentStop = "";
+    private String currentRoute = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case R.id.save_button:
+                // Warn the user if no stop is available to save
                 if (currentStop.isEmpty()) {
                     new AlertDialog.Builder(this)
                             .setTitle("Stop Required")
@@ -88,10 +89,13 @@ public class MainActivity extends AppCompatActivity {
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
+                } else {
+                    // Save the stop and route that were passed
+                    DatabaseHandler handler = new DatabaseHandler(this);
+                    Favorite favorite = new Favorite(currentStop, currentRoute, 0);
+                    handler.addFavorite(favorite);
                 }
-                DatabaseHandler handler = new DatabaseHandler(this);
-                Favorite favorite = new Favorite(currentStop, currentRoute, 0);
-                handler.addFavorite(favorite);
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
