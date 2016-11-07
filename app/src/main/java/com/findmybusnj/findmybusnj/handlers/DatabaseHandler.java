@@ -39,7 +39,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_FAVORITES + "("
-                + KEY_PK + " INTEGER PRIMARY KEY"
+                + KEY_PK + " INTEGER PRIMARY KEY,"
                 + KEY_STOP + " TEXT," + KEY_ROUTE + " TEXT,"
                 + KEY_FREQ + " INTEGER" + ")";
         db.execSQL(CREATE_CONTACTS_TABLE);

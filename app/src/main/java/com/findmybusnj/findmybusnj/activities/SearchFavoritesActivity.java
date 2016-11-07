@@ -10,13 +10,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.findmybusnj.findmybusnj.R;
+import com.findmybusnj.findmybusnj.handlers.DatabaseHandler;
+import com.findmybusnj.findmybusnj.models.Favorite;
 import com.goebl.david.Webb;
 
 import org.json.JSONArray;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchFavoritesActivity extends AppCompatActivity {
     // Used when search button is pressed
@@ -39,6 +46,12 @@ public class SearchFavoritesActivity extends AppCompatActivity {
 
         Button search = (Button) findViewById(R.id.search_button);
         search.setOnClickListener(searchListener);
+
+        ListView listView = (ListView) findViewById(R.id.favorite_list_view);
+        DatabaseHandler handler = new DatabaseHandler(this);
+        List<Favorite> favoriteArrayList = handler.getAllFavorites();
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, favoriteArrayList);
+        listView.setAdapter(adapter);
     }
 
     /**
@@ -120,7 +133,13 @@ public class SearchFavoritesActivity extends AppCompatActivity {
      * @param response  JSONArray retrieved from the server
      */
     private void updateList(JSONArray response) {
+        TextView stop_input = (TextView) findViewById(R.id.stop_number_input);
+        TextView route_input = (TextView) findViewById(R.id.route_input);
+
         Intent intent = getIntent().putExtra("ResponseArray", response.toString());
+        intent.putExtra("Stop", stop_input.getText().toString());
+        intent.putExtra("Route", route_input.getText().toString());
+
         setResult(RESULT_OK, intent);
         finish();
         Log.d("Response: ", response.toString());
