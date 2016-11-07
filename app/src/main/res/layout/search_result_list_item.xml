@@ -6,24 +6,33 @@
 
     <TextView
         android:id="@+id/routeTitle"
+        android:gravity="bottom"
+        android:textAppearance="@android:style/TextAppearance.Material.Medium"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/arrivalCircle"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/arrivalCircle"
+        android:layout_marginLeft="10dp"/>
 
     <TextView
         android:id="@+id/routeDetails"
+        android:textAppearance="@android:style/TextAppearance.Material.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/routeTitle"
-        android:layout_alignLeft="@+id/arrivalCircle"
-        android:layout_alignParentRight="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/arrivalCircle"
+        android:layout_alignBottom="@+id/arrivalCircle"
+        android:layout_marginLeft="10dp"/>
 
-    <com.findmybusnj.findmybusnj.drawable.Circle
+    <TextView
         android:id="@+id/arrivalCircle"
+        android:gravity="center"
+        android:textAppearance="@android:style/TextAppearance.Material.Large"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentStart="true" />
+
 </RelativeLayout>
