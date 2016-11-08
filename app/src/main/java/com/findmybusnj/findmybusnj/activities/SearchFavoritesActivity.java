@@ -51,7 +51,7 @@ public class SearchFavoritesActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.favorite_list_view);
         DatabaseHandler handler = new DatabaseHandler(this);
         List<Favorite> favoriteArrayList = handler.getAllFavorites();
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, favoriteArrayList);
+        FavoritesAdapter adapter = new FavoritesAdapter(this, favoriteArrayList);
         listView.setAdapter(adapter);
     }
 
