@@ -77,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
                 return true;
             case R.id.save_button:
+                DatabaseHandler handler = new DatabaseHandler(this);
+                Favorite favorite = new Favorite(currentStop, currentRoute, 0);
+
                 // Warn the user if no stop is available to save
                 if (currentStop.isEmpty()) {
                     new AlertDialog.Builder(this)
@@ -89,10 +92,20 @@ public class MainActivity extends AppCompatActivity {
                             })
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
-                } else {
+                } else if (handler.hasFavorite(favorite.generatePrimaryKey())) {
+                    new AlertDialog.Builder(this)
+                            .setTitle("Stop already saved")
+                            .setMessage("You have already saved this stop, no need to save it again.")
+                            .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    // no-op
+                                }
+                            })
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();
+                }
+                else {
                     // Save the stop and route that were passed
-                    DatabaseHandler handler = new DatabaseHandler(this);
-                    Favorite favorite = new Favorite(currentStop, currentRoute, 0);
                     handler.addFavorite(favorite);
                 }
 

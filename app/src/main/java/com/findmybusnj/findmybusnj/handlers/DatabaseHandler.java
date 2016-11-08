@@ -34,7 +34,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     /**
      * Creates table for the given database
-     * @param db
+     * @param db the database to be created
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -78,7 +78,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     /**
      * Removes the given favorite if it exists in the database
-     * @param favorite
+     * @param favorite the favorite object being removed from the table
      */
     public void deleteFavorite(Favorite favorite) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -89,6 +89,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     /**
      * Gets a favorite from the database given a key
+     * @param key The key for the given favorite being fetched
      * @return Favorite fetched from the database
      */
     public Favorite getFavorite(int key) {
@@ -154,7 +155,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     /**
      * Updates the favorite if it already exists in the table
      * @param favorite Item to be updated
-     * @return
+     * @return The number of rows affected
      */
     public int updateFavorite(Favorite favorite) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -169,5 +170,27 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return db.update(TABLE_FAVORITES, values, KEY_PK + " = ?",
                 new String[] { String.valueOf(favorite.generatePrimaryKey())});
+    }
+
+    /**
+     * Used to determine if a favorite has already been saved to the DB
+     * @param key Used to look up in favorite in question to see if it exists
+     * @return True if it exists, false otherwise
+     */
+    public boolean hasFavorite(String key) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // Query the DB
+        Cursor cursor = db.query(TABLE_FAVORITES, new String[] {KEY_PK, KEY_STOP, KEY_ROUTE, KEY_FREQ},
+                KEY_PK + "=?", new String[]{ String.valueOf(key)}, null, null, null, null);
+
+        boolean hasFavorite = false;
+        if(cursor.moveToFirst()) {
+            hasFavorite = true;
+        }
+
+        cursor.close();
+        db.close();
+        return hasFavorite;
     }
 }
