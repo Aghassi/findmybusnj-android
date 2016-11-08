@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -29,7 +30,11 @@ public class SearchFavoritesActivity extends AppCompatActivity {
     // Used when search button is pressed
     private View.OnClickListener searchListener = new View.OnClickListener() {
         public void onClick(View v) {
-            makePostRequest();
+            // Gets stop textfield along with contents
+            TextView stop_input = (TextView) findViewById(R.id.stop_number_input);
+            TextView route_input = (TextView) findViewById(R.id.route_input);
+
+            makePostRequest(stop_input.getText().toString(), route_input.getText().toString());
         }
     };
 
@@ -48,7 +53,16 @@ public class SearchFavoritesActivity extends AppCompatActivity {
         search.setOnClickListener(searchListener);
 
         // Locate the listview for favorites and populate the list with the favorites currently stored
-        ListView listView = (ListView) findViewById(R.id.favorite_list_view);
+        final ListView listView = (ListView) findViewById(R.id.favorite_list_view);
+
+        // Sets listener to handle selection of a favorite
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Favorite temp = (Favorite)listView.getItemAtPosition(i);
+                makePostRequest(temp.getStop(), temp.getRoute());
+            }
+        });
         DatabaseHandler handler = new DatabaseHandler(this);
         List<Favorite> favoriteArrayList = handler.getAllFavorites();
         FavoritesAdapter adapter = new FavoritesAdapter(this, favoriteArrayList);
@@ -105,13 +119,7 @@ public class SearchFavoritesActivity extends AppCompatActivity {
     /**
      * Makes a post request to the server and notifies the ListView it needs to update with new data
      */
-    private void makePostRequest() {
-        // Gets stop textfield along with contents
-        TextView stop_input = (TextView) findViewById(R.id.stop_number_input);
-        TextView route_input = (TextView) findViewById(R.id.route_input);
-        String stop = stop_input.getText().toString();
-        String route = route_input.getText().toString();
-
+    private void makePostRequest(String stop, String route) {
         if (stop.isEmpty()) {
             new AlertDialog.Builder(this)
                     .setTitle("Stop Required")
