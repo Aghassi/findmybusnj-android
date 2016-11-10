@@ -9,6 +9,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SearchFavoritesActivity extends AppCompatActivity {
+
     // Used when search button is pressed
     private View.OnClickListener searchListener = new View.OnClickListener() {
         public void onClick(View v) {
@@ -63,10 +66,42 @@ public class SearchFavoritesActivity extends AppCompatActivity {
                 makePostRequest(temp.getStop(), temp.getRoute());
             }
         });
+
         DatabaseHandler handler = new DatabaseHandler(this);
         List<Favorite> favoriteArrayList = handler.getAllFavorites();
         FavoritesAdapter adapter = new FavoritesAdapter(this, favoriteArrayList);
         listView.setAdapter(adapter);
+
+        // Register view for context menu
+        registerForContextMenu(listView);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.delete_context_menu, menu);
+        menu.setHeaderTitle("Delete favorite?");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_delete:
+                DatabaseHandler handler = new DatabaseHandler(this);
+                List<Favorite> favoriteArrayList = handler.getAllFavorites();
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo)item.getMenuInfo();
+
+                Favorite favoriteToDelete = favoriteArrayList.get(info.position);
+                handler.deleteFavorite(favoriteToDelete);
+                favoriteArrayList.remove(info.position);
+
+                ListView listView = (ListView) findViewById(R.id.favorite_list_view);
+                FavoritesAdapter adapter = new FavoritesAdapter(this, favoriteArrayList);
+                listView.setAdapter(adapter);
+
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
     /**
