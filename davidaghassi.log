@@ -1,6 +1,7 @@
 9/25 - Spent half an hour learning about Android development on Udacity
 9/27 - spent an hour learning about Android View Hierarchies on Udacity
 9/27 evening - Spent and hour and a half learning about HTTP calls and JSON parsing in Android via Udacity course. Spent another hour doing UX Mocks.
+10/3 - Read up on material design and navigation paradigms via https://material.google.com/components/tabs.html#
 10/7 - Continued to work on search-request branch by laying out UI and prepping functionality
 10/13 - Spent about 2-3 hours learninga bout how Activities and Fragments pass data back and forth
 10/14 - Spent the week getting JSON data from REST call and passing it between activities. Plan for next week is to create custom data model to handle response.
