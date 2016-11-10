@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.findmybusnj.findmybusnj.adaptors.MainViewAdaptor;
 import com.findmybusnj.findmybusnj.R;
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
                 else {
                     // Save the stop and route that were passed
                     handler.addFavorite(favorite);
+                    Toast.makeText(getApplicationContext(), "Stop saved.", Toast.LENGTH_SHORT).show();
                 }
 
                 return true;
