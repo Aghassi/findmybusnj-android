@@ -71,3 +71,12 @@ Week 6:
 11/4: Officially gets user location and marks with marker both on emulator and with Android phone.
 	- started working on populating the map with nearby locations as given by database
 Next: work on zoom function and visual flares. CONTINUE with populating the map
+
+Week 7:
+11/6-8: Read on retreiving JSON parsing and url connection on Android developer & looked at iOS version for reference + mobilesiri article
+	- Tested using David's iOS code. retrieved information but unsure where to put.
+11/7: Set up Android Studio for Android Wear emulator and tested sample code from android developer for 2 hours
+11/11: Integrated new stable master with my stable tab -- unrecognized error appeared on Android Studio with problems regarding resources, 
+ 	will upload once error is resolved. Have spent 1.5 hours pinpointing exact problem. 
+	Possibly a reinstall issue that was encountered aroudn October when I first tried to integrate two different versions
+	- Location gps "deprecated" issue that isn't present in my solo version.
