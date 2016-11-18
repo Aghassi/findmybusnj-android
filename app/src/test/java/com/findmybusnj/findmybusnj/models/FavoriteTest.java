@@ -1,4 +1,4 @@
-package com.findmybusnj.findmybusnj;
+package com.findmybusnj.findmybusnj.models;
 
 import com.findmybusnj.findmybusnj.models.Favorite;
 
@@ -10,9 +10,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 /**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ * Tests Favorite Model
  */
 public class FavoriteTest {
     Favorite favorite;
