@@ -80,3 +80,19 @@ Week 7:
  	will upload once error is resolved. Have spent 1.5 hours pinpointing exact problem. 
 	Possibly a reinstall issue that was encountered aroudn October when I first tried to integrate two different versions
 	- Location gps "deprecated" issue that isn't present in my solo version.
+
+Week 8:
+11/12: Morning - spent 2 hours on attempting JSON object request on separate class, Came to conclusion map has missing edge cases that won't work well with retreiving locations
+11/13: Evening - spent ~2 hours on fixing nearby tab reaction to changing locations in order to facilitate the retrieval of locations
+11/15: Evening - spent ~2 hours on Reading up on Android Wear about displaying information. attempted a tutorial from Android's developeed github
+11/18: Afternoon/Evening - spent 5 hours on fixing nearby tab
+	ACCOMPLISHED:
+	- zoom on user location at start up
+	- requests user for location permissions if not already given (occasionally crashed on fresh install?)
+	- user can click and it will refresh the map fragment to flood with nearby stations (not yet in stable build)
+	- user location tracked with blue dot
+	- user defined clicked spot marked with Cyan Marker vs Red markers for JSON retreived areas.
+	- ipon clicking new location, tapping on marker will give user option to navigate to desired area.
+	- onResume, destruction of tab, Suspension of tab, and time out on tab will NO LONGER mess up the Map's location accuracy
+	- *** Should ask for all permissions on main activity - Must wait till everyone has a stable tab
+	- *** Ready for JSON retrieval shenanigans
