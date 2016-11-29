@@ -24,5 +24,18 @@ public class ResultDataModelTest {
         rdm = null;
     }
 
+    @Test
+    public void assertSetTimeForZero() {
+        rdm.setTime(0);
 
+        assertThat("arriving was set to true, and time is unchanged", rdm.isArriving() == true, is(true));
+        assertThat("time hasn't changed from 0", rdm.getTime() == 0, is(true));
+    }
+
+    @Test
+    public void assertSetTimeForGreaterThanZero() {
+        rdm.setTime(1);
+
+        assertThat("time is set to 1", rdm.getTime() == 1, is(true));
+    }
 }
