@@ -96,3 +96,19 @@ Week 8:
 	- onResume, destruction of tab, Suspension of tab, and time out on tab will NO LONGER mess up the Map's location accuracy
 	- *** Should ask for all permissions on main activity - Must wait till everyone has a stable tab
 	- *** Ready for JSON retrieval shenanigans
+Week 9: (Post Thanksgiving)
+11/27: Evening - spent 2 hours following tutorial on post request for information. Implemented a rough outline on retreiving information to no avail.
+		Left off on verbose catch exception for picking up on next time.
+11/30: Afternoon - spent ~3 hours on revising outline for request. Reviewed David's stable code for retreiving information. Ran into a lot of errors.
+		Also attempted to merge both stable sides but found an error in format for nearbytab that doesn't correlate to David's end.
+12/1: Evening - spent 2~3 hours: fixing nearbytab format to match david's half. Will merge once JSON on nearbytab works.
+		Emulator for Android Wear bugged out with update on platform-tools ver 25. Installation and relocation of files happened.
+		Approached making Android Wear app wrong for about an hour. 
+12/2: Evening - spent 3 hours: trial and error on JSON retreival of information. Set up an outline for putting the information for markers on map.
+		should inundate map with markers once information is properly retreived.
+		Put Permissions for Read and Write to external storage prompts for user.
+	NEXT: 
+	- push favorites from David's end to Android wear in a rudamentary manner. Nothing too fancy - Just alerts on favorited bus stops
+	- Make it so permissions are asked at launch of app
+	- JSON retreival feels very soon to done.
+	- Pushed stable (not crash) version of Nearbytab with initial (wrong) outline to branch.
