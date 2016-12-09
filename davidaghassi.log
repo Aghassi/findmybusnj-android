@@ -9,3 +9,4 @@
 10/26 - Researched use of native SQLite database for storing and retrieving data models for favorite saved stops
 11/4 -  Implemented SQLDatabaseHelper class and started setting up for data passing around to store and retrieve favorites
 11/18 - Started writing tests for model layer.
+12/9 - Helped with a small bug on the Near By tab. Wrote personal essay, start contributing to the group essay.
