@@ -3,7 +3,6 @@ package com.findmybusnj.findmybusnj.fragments;
 import com.findmybusnj.findmybusnj.R;
 
 import android.Manifest;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.support.v4.app.Fragment;
@@ -11,15 +10,15 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.location.Location;
 import com.google.android.gms.location.LocationListener;
-import android.support.annotation.NonNull;
+
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -39,22 +38,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.findmybusnj.findmybusnj.models.ResultDataModel;
-import com.findmybusnj.findmybusnj.R;
-import com.findmybusnj.findmybusnj.handlers.DatabaseHandler;
-import com.findmybusnj.findmybusnj.models.Favorite;
-import com.goebl.david.Response;
 import com.goebl.david.Webb;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
 
 
 /**
@@ -73,10 +61,7 @@ public class NearByTab extends Fragment implements GoogleApiClient.ConnectionCal
     private MapView mMapView;
     private Marker mCurrLocation;
 
-    //private Location mLastLocation;
-
     private static String FIND_BUS_URL = "https://findmybusnj.com/rest/getPlaces";
-    //private TextView lblLocation;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -86,20 +71,12 @@ public class NearByTab extends Fragment implements GoogleApiClient.ConnectionCal
             checkLocationPermission();
         }
 
-
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .build();
         mGoogleApiClient.connect();
-
-      /*  mLocationRequest = LocationRequest.create()
-                .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                .setInterval(10 * 1000)
-                .setFastestInterval(1 * 1000);*/
-
-
 
         Log.d(TAG, "onCreate");
     }
@@ -110,11 +87,8 @@ public class NearByTab extends Fragment implements GoogleApiClient.ConnectionCal
 
         mMapView = (MapView) rootView.findViewById(R.id.map);
         mMapView.onCreate(savedInstanceState);
-
-
         mMapView.onResume();
 
-        //lblLocation = (TextView) rootView.findViewById(R.id.lblLocation);
 
         Log.d(TAG, "onCreateView");
         return rootView;
@@ -132,11 +106,6 @@ public class NearByTab extends Fragment implements GoogleApiClient.ConnectionCal
     @Override
     public void onPause() {
         super.onPause();
-        // Because I wanted to disconnect at some point
-       /* if (mGoogleApiClient.isConnected())
-            mGoogleApiClient.disconnect();
-        mMapView.onPause();*/
-
         if (mGoogleApiClient != null) {
             LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         }
@@ -215,18 +184,6 @@ public class NearByTab extends Fragment implements GoogleApiClient.ConnectionCal
     private void setUpMap() {
         //MapAsync used to be here
 
-        // For old JSON test
-        new Thread(new Runnable() {
-            public void run() {
-                try {
-                    retrieveAndAddCities();
-                } catch (IOException e) {
-                    Log.d("new Thread in Setup","Cannot retrive cities");
-                    return;
-                }
-            }
-        }).start();
-
         mMapView.getMapAsync(new OnMapReadyCallback() {
 
             @Override
@@ -254,22 +211,11 @@ public class NearByTab extends Fragment implements GoogleApiClient.ConnectionCal
                         //place marker where user just clicked
                         mCurrLocation = mGoogleMap.addMarker(new MarkerOptions()
                                 .position(point)
-                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN)));
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
                         Log.d("MyMap", "MapClick After Add Marker");
 
-                        /*try {
-                            LatLng test = mCurrLocation.getPosition();
-                            Location location = new Location("test");
-                            location.setLatitude(test.latitude);
-                            location.setLongitude(test.longitude);
-                            testNoContent(location);
-                        } catch (Exception e) {
-                            StringWriter errors = new StringWriter();
-                            e.printStackTrace(new PrintWriter(errors));
-                            errors.toString();
-                            Log.d("test", errors.toString());
-                        }*/
+
 
                         LatLng test = mCurrLocation.getPosition();
 
@@ -296,11 +242,13 @@ public class NearByTab extends Fragment implements GoogleApiClient.ConnectionCal
     private void handleNewLocation(Location location) {
         LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-        MarkerOptions options = new MarkerOptions()
+        //If you want to add a marker where the user is - the blue circle will appear anyway
+        /*MarkerOptions options = new MarkerOptions()
                 .position(latLng)
                 .title("You Are Here")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
-        mCurrLocation = mGoogleMap.addMarker(options);
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                .flat(true);
+        mCurrLocation = mGoogleMap.addMarker(options);*/
 
         //Move map Camera
         CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(latLng, 15);
@@ -381,60 +329,7 @@ public class NearByTab extends Fragment implements GoogleApiClient.ConnectionCal
     }
 
 
-    // OLD JSON
-    protected void retrieveAndAddCities() throws IOException {
-        HttpURLConnection conn = null;
-        final StringBuilder json = new StringBuilder();
-        try {
-            // Connect to the web service
-            URL url = new URL(FIND_BUS_URL);
-            conn = (HttpURLConnection) url.openConnection();
-            InputStreamReader in = new InputStreamReader(conn.getInputStream());
 
-            // Read the JSON data into the StringBuilder
-            int read;
-            char[] buff = new char[1024];
-            while ((read = in.read(buff)) != -1) {
-                json.append(buff, 0, read);
-            }
-        } catch (IOException e) {
-            Log.d("retrieveAddCities", "Error connecting to service");
-            throw new IOException("Error connecting to service");
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
-            }
-        }
-
-        // Create markers for the city data.
-        // Must run this on the UI thread since it's a UI operation.
-        getActivity().runOnUiThread(new Runnable() {
-            public void run() {
-                try {
-                    createMarkersFromJson(json.toString());
-                } catch (JSONException e) {
-                    Log.d("ruinOnUI", "Error processing JSON");
-                }
-            }
-        });
-    }
-    void createMarkersFromJson(String json) throws JSONException {
-        // De-serialize the JSON string into an array of city objects
-        JSONArray jsonArray = new JSONArray(json);
-        for (int i = 0; i < jsonArray.length(); i++) {
-
-            // Create a marker for each city in the JSON data.
-            JSONObject jsonObj = jsonArray.getJSONObject(i);
-            mGoogleMap.addMarker(new MarkerOptions()
-                    .title(jsonObj.getString("name"))
-                    .snippet(Integer.toString(jsonObj.getInt("population")))
-                    .position(new LatLng(
-                            jsonObj.getJSONArray("latlng").getDouble(0),
-                            jsonObj.getJSONArray("latlng").getDouble(1)
-                    ))
-            );
-        }
-    }
 
 
     // New JSON
@@ -486,7 +381,6 @@ public class NearByTab extends Fragment implements GoogleApiClient.ConnectionCal
      * @param response  JSONArray retrieved from the server
      */
     private void updateStops(JSONObject response) throws JSONException{
-        //JSONArray jsonArray = new JSONArray(json);
         JSONArray results = response.getJSONArray("results");
         for (int i = 0; i < results.length(); i++) {
 

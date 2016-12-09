@@ -112,3 +112,15 @@ Week 9: (Post Thanksgiving)
 	- Make it so permissions are asked at launch of app
 	- JSON retreival feels very soon to done.
 	- Pushed stable (not crash) version of Nearbytab with initial (wrong) outline to branch.
+
+Week 10:
+12/6: Evening - spent 3 hours on fixing JSON Post request. Turns out there was a type error when receiving the response that led to lost time. (geometry becomes JSONObject changed twice before Double)
+		Finally pulls bus stops from around the area and works well on app.
+		Continue work on wearable. Notifications come too fast.
+12/7: Evening - Phone becomes corrupted -- Can no longer test app or wearable on phone. For the app, this is no problem as the emulator works 90% of the time.
+		Android stops use of wearable emulator if you do not have a real Android phone in a recent update. Troubleshooted to see if there was a workaround
+		Found an alternative but costs $169 to use wearable emulator (Genymotion) Discussed with Aghassi and chose not to continue wearable development
+
+12/8: Afternoon - Cleaned up extra text views and fully integrated both sides of app. Met with Aghassi to discuss progress on app and if all requirements were met
+			App works as intended.
+12/9: Day time - Comments and minor code clean up
